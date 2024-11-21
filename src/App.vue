@@ -1,5 +1,6 @@
 <template>
   <el-config-provider :size="elSize" :locale="locales[language]" :z-index="3000">
+    <router-view></router-view>
   </el-config-provider>
 </template>
 
