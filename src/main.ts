@@ -22,16 +22,13 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { setupGlobDirectives } from './directives'
 import language from './language'
 
-
 const app = createApp(App)
 initStore(app)
 initRouter(app)
 registerGlobComp(app)
-
+setupGlobDirectives(app)
 
 app.use(language)
-
-
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

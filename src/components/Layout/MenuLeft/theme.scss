@@ -196,10 +196,11 @@
       width: calc(100% - $menu-spacing) !important;
     }
 
+    /* 样式抖动原因 */
     .el-sub-menu__title {
       width: calc(100% - $menu-spacing) !important;
       height: 52px;
-      margin: 10px 0; // 调整每一个菜单项的间距
+      // margin: 10px 0; // 调整每一个菜单项的间距
 
       &:hover {
         background: var(--art-gray-200) !important;
