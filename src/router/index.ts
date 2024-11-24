@@ -75,6 +75,24 @@ export const router = createRouter({
 // 需要权限的路由
 export const roleRoutes: AppRouteRecordRaw[] = [
   {
+    path: '/user',
+    name: 'User',
+    component: Home,
+    meta: {
+      title: '用户管理',
+    },
+    children: [
+      {
+        path: '/user/user' ,
+        name: 'Users',
+        component: () => import('@views/user/User.vue'),
+        meta: {
+          title: '个人中心',
+        }
+      }
+    ]
+  },
+  {
     path: '/menu',
     name: 'Menu',
     component: Home,

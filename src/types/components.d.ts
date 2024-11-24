@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ArtTable: typeof import('./../components/Table/ArtTable.vue')['default']
+    Breadcrumb: typeof import('./../components/Layout/Breadcrumb/index.vue')['default']
     DragVerify: typeof import('./../components/Form/DragVerify.vue')['default']
     Editor: typeof import('./../components/Form/Editor.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -40,8 +41,10 @@ declare module 'vue' {
     FormInput: typeof import('./../components/Form/FormInput.vue')['default']
     FormSelect: typeof import('./../components/Form/FormSelect.vue')['default']
     MenuLeft: typeof import('./../components/Layout/MenuLeft/index.vue')['default']
+    Notice: typeof import('./../components/Layout/Notice/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./../components/Layout/Search/index.vue')['default']
     Submenu: typeof import('./../components/Layout/Submenu/submenu.vue')['default']
     TableBar: typeof import('./../components/Table/TableBar.vue')['default']
     Templae: typeof import('./../components/Templae.vue')['default']

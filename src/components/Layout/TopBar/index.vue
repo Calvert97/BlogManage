@@ -30,7 +30,7 @@
          </div>
 
          <!-- 面包屑 -->
-          <!-- <breadcrumb v-if="showCrumbs && isLeftMenu"/> -->
+          <breadcrumb v-if="showCrumbs && isLeftMenu"/>
 
          <!-- 菜单 -->
           <MenuTop v-if="isTopMenu" :list="menuList" :width="menuTopWidth" />
@@ -113,52 +113,52 @@
             </el-popover>
           </div>
 
-             <!-- 用户信息 -->
+          <!-- 用户信息 -->
           <div class="user">
-            <el-popover
-              ref="userMenuPopover"
-              placement="bottom-end"
-              :width="210"
-              :hide-after="0"
-              :offset="0"
-              triggrer="hover"
-              :show-arrow="false"
-              popper-class="user-menu-popover"
-              popper-style="border: 1px solid var(--art-border-dashed-color); border-radius:10px; padding: 5px 16px;5px 16px;"
-              >
-              <template #reference>
-                <img class="cover" src="@imgs/user/avatar.png"/>
-              </template>
-              <template #default>
-                <div class="user-menu-box">
-                  <div class="user-head">
-                    <img class="cover" src="@imgs/user/avatar.png" style="float: left"/>
-                    <div class="user-wrap">
-                      <span class="name">{{ userInfo.username }}</span>
-                    </div> 
+          <el-popover
+            ref="userMenuPopover"
+            placement="bottom-end"
+            :width="210"
+            :hide-after="0"
+            :offset="20"
+            trigger="hover"
+            :show-arrow="false"
+            popper-class="user-menu-popover custom-transition"
+            popper-style="border: 1px solid var(--art-border-dashed-color); border-radius: 10px; padding: 5px 16px; 5px 16px;"
+          >
+            <template #reference>
+              <img class="cover" src="@imgs/user/avatar.png" />
+            </template>
+            <template #default>
+              <div class="user-menu-box">
+                <div class="user-head">
+                  <img class="cover" src="@imgs/user/avatar.png" style="float: left" />
+                  <div class="user-wrap">
+                    <span class="name">{{ userInfo.username }}</span>
                   </div>
-                  <ul class="user-menu">
-                    <li @click="goPage('user/user')">
-                      <i class="menu-icon iconfont-sys">&#xe734;</i>
-                      <span class="menu-txt">{{ $t('topBar.user[0]') }}</span>
-                    </li>
-                    <li @click="toDocs()">
-                      <i class="menu-icon iconfont-sys" style="font-size: 15px;">&#xe828;</i>
-                      <span class="menu-txt">{{ $t('topBar.user[1]') }}</span>
-                    </li>
-                    <li @click="toGithub()">
-                      <i class="menu-icon iconfont-sys">&#xe8d6;</i>
-                      <span class="menu-txt">{{ $t('topBar.user[2]') }}</span>
-                    </li>
-                    <li @click="loginOut()">
-                      <i class="menu-icon iconfont-sys">&#xe780;</i>
-                      <span class="menu-txt">{{ $t('topBar.user[3]') }}</span>
-                    </li>
-                  </ul>
                 </div>
-              </template>
-            </el-popover>
-          </div>
+                <ul class="user-menu">
+                  <li @click="goPage('/user/user')">
+                    <i class="menu-icon iconfont-sys">&#xe734;</i>
+                    <span class="menu-txt">{{ $t('topBar.user[0]') }}</span>
+                  </li>
+                  <li @click="toDocs()">
+                    <i class="menu-icon iconfont-sys" style="font-size: 15px">&#xe828;</i>
+                    <span class="menu-txt">{{ $t('topBar.user[1]') }}</span>
+                  </li>
+                  <li @click="toGithub()">
+                    <i class="menu-icon iconfont-sys">&#xe8d6;</i>
+                    <span class="menu-txt">{{ $t('topBar.user[2]') }}</span>
+                  </li>
+                  <li @click="loginOut">
+                    <i class="menu-icon iconfont-sys">&#xe780;</i>
+                    <span class="menu-txt">{{ $t('topBar.user[3]') }}</span>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </el-popover>
+        </div>
       </div>
     </div>
     <slot></slot>
@@ -169,10 +169,10 @@
 
 <script setup lang="ts">
 
+  import Breadcrumb from '../Breadcrumb/index.vue'
   import { LanguageEnum, MenuTypeEnum, MenuWidth } from '@/enums/appEnum'
-
+  import Notice from '../Notice/index.vue'
   import { useI18n } from 'vue-i18n';
-
   import { useSettingStore } from '@/store/modules/setting'
   import { HOME_PAGE } from '@/router'
   import { SystemInfo } from '@/config/setting'
@@ -199,11 +199,12 @@
   const menuType = computed(() => settingStore.menuType)
   const isLeftMenu = computed(() => menuType.value === MenuTypeEnum.LEFT)
   const isTopMenu = computed(() => menuType.value === MenuTypeEnum.TOP)
-
+  const language = computed(() => userStore.language)
 
   const menuList = computed(() => useMenuStore().getMenuList)
   const isFullScreen = ref(false)
   const showNotice = ref(false)
+  const notice = ref(null)
 
   const showLanguage = computed(() => settingStore.showLanguage)
   const { locale } = useI18n()
@@ -214,6 +215,34 @@
   const userInfo = computed(() => userStore.getUserInfo)
   const userMenuPopover = ref()
   const { t } = useI18n();
+
+  onMounted(() => {
+    initLanguage()
+    document.addEventListener('click', bodyCloseNotice)
+  })
+
+  onUnmounted(() => {
+    document.addEventListener('click', bodyCloseNotice)
+  })
+
+  const bodyCloseNotice = (e: any) => {
+    let { className } = e.target
+
+    if (showNotice.value) {
+      if (typeof className === 'object') {
+        showNotice.value = false
+        return
+      }
+      if (className.indexOf('notice-btn') === -1) {
+        showNotice.value = false
+      }
+    }
+  }
+
+
+  const initLanguage = () => {
+    locale.value = language.value
+  }
 
 
   const { width } = useWindowSize()
@@ -321,4 +350,5 @@
 <style lang="scss" scoped>
   @import './style' ;
   @import './mobile';
+
 </style>

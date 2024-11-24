@@ -1,23 +1,53 @@
 <template>
-  <div class="frame" :style="paddingLeft, paddingTop">
+  <!-- 页面布局 注意大括号不能省略 -->
+  <div class="frame" :style="{ paddingLeft, paddingTop }">
 
-  
+
+    <!-- 左侧菜单 -->
+     <menu-left v-if="menuType === MenuTypeEnum.LEFT"></menu-left>
+
+    <!-- 搜索组件 -->
+    <search></search>
+
     <!-- 顶栏 -->
-  <top-bar>
+    <top-bar>
       <template #default>
         <work-tab v-if="showWorkTab"></work-tab>
       </template>
     </top-bar>
 
-    <!-- 左侧菜单 -->
-     <menu-left v-if="menuType === MenuTypeEnum.LEFT"></menu-left>
+    <!-- 内容区域 -->
+    <div class="container">
+      <router-view
+        v-if="isRefresh && isOnline"
+        v-slot="{ Component, route }"
+        :style="{ minHeight }"
+      >
+        <transition :name="pageTransition" mode="out-in" appear>
+          <keep-alive :max="10">
+            <component :is="Component" :key="route.path" v-if="route.meta.keepAlive" />
+          </keep-alive>
+        </transition>
+        <transition :name="pageTransition" mode="out-in" appear>
+          <component :is="Component" :key="route.path" v-if="!route.meta.keepAlive" />
+        </transition>
+      </router-view>
 
+      <!-- 网络异常提示组件 -->
+      <network v-else></network>
+
+    </div>
+
+    <!-- 个性化设置 -->
+    <!-- <setting /> -->
     
   </div>
 </template>
 
 <script setup lang="ts"> 
   import '@/assets/styles/transition.scss'
+  import { computed, ref, watch, nextTick } from 'vue'
+
   import TopBar from "@comps/Layout/TopBar/index.vue";
 
   import { MenuWidth, MenuTypeEnum } from '@/enums/appEnum'
@@ -29,14 +59,23 @@
   const settingStore = useSettingStore()
   const menuStore = useMenuStore()
 
+  // 网络状态
+  const { isOnline } = useNetwork()
+
+  // 页面动画
+  const pageTransition = computed(() => settingStore.pageTransition)
+
   // 菜单是否打开
   const menuOpen = computed(() => settingStore.menuOpen) 
 
-    // 是否显示工作标签
-    const showWorkTab = computed(() => settingStore.showWorkTab)
+  // 是否显示工作标签
+  const showWorkTab = computed(() => settingStore.showWorkTab)
 
   // 菜单类型
   const menuType = computed(() => settingStore.menuType)
+
+  // 是否刷新页面的状态
+  const isRefresh = ref(true)
 
   // 根据菜单是否打开来设置左侧填充宽度
   const paddingLeft = computed(() => {
