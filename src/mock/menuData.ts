@@ -443,20 +443,4 @@ export const menuData: MenuListType[] = [
       }
     ]
   },
-  {
-    id: 11,
-    title: '帮助中心',
-    title_en: 'Help center',
-    name: '0',
-    icon: '\ue719',
-    path: '',
-    children: [
-      {
-        id: 1101,
-        title: '官方文档',
-        title_en: 'Document',
-        path: 'https://www.lingchen.kim/art-design-pro/docs/'
-      }
-    ]
-  }
 ]

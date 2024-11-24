@@ -95,6 +95,7 @@
               </template>
             </el-dropdown>
           </div>
+          
             <!-- 设置 -->
           <div class="btn-box" @click="openSetting">
             <el-popover :visible="showSettingGuide" placement="bottom-start" :width="190" :offset="0">
