@@ -42,7 +42,6 @@
     ]
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@vue/reactivity": "^3.4.35",
     "@vueuse/core": "^11.0.0",
     "@wangeditor/editor": "^5.1.23",
@@ -50,7 +49,6 @@
     "axios": "^1.7.5",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.4.0",
-    "element-plus": "^2.8.0",
     "highlight.js": "^11.10.0",
     "md-editor-v3": "^4.17.0",
     "mitt": "^3.0.1",
@@ -68,6 +66,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.4.1",
     "@commitlint/config-conventional": "^19.4.1",
+    "@element-plus/icons-vue": "^2.3.1",
     "@eslint/js": "^9.9.1",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^22.1.0",
@@ -77,6 +76,7 @@
     "@vue/compiler-sfc": "^3.0.5",
     "commitizen": "^4.3.0",
     "cz-git": "^1.9.4",
+    "element-plus": "^2.8.8",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

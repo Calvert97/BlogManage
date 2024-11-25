@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <el-divider></el-divider>
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="角色名称" prop="roleName">
         <el-input
@@ -624,3 +625,60 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+
+  .el-divider--horizontal {
+    margin: 10px 0;
+  }
+
+  .el-form--inline .el-form-item {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+    vertical-align: top;
+  }
+  .el-form-item__label {
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: #606266;
+    line-height: 32px !important;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .el-input--small .el-input__inner {
+      height: 32px;
+      line-height: 32px;
+  }
+
+  .el-input__inner {
+    font-size: 13px;
+  }
+
+  .el-select--small .el-select__wrapper {
+    gap: 4px;
+    padding: 2px 8px;
+    min-height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+  }
+
+  .el-range-editor.el-input__wrapper {
+     padding: 0 10px;
+     width: 220px !important;
+  }
+
+  .el-range-editor--small.el-input__wrapper {
+    height: 32px;
+  }
+
+  .el-range-editor--small .el-range-input {
+    font-size: 13px;
+  }
+
+
+</style>
