@@ -11,7 +11,7 @@ import viteImagemin from 'vite-plugin-imagemin'
 export default ({ mode }) => {
   const root = process.cwd()
   const env = loadEnv(mode, root)
-  const { VITE_VERSION, VITE_PORT, VITE_BASE_URL, VITE_API_URL } = env
+  const { VITE_VERSION, VITE_PORT, VITE_BASE_URL, VITE_API_URL,VITE_API_URL_RY } = env
 
   console.log(`🚀 API_URL = ${VITE_API_URL}`)
   console.log(`🚀 VERSION = ${VITE_VERSION}`)
@@ -28,7 +28,12 @@ export default ({ mode }) => {
           target: VITE_API_URL,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
-        }
+        },
+        '/api/ruoyi': {
+          target: VITE_API_URL_RY,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/ruoyi/, '')
+        },
       },
       host: true
     },

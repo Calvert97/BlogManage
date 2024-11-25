@@ -159,6 +159,15 @@ export const roleRoutes: AppRouteRecordRaw[] = [
           title: '角色权限',
           keepAlive: true
         }
+      },
+      {
+        path: '/user/roleRY',
+        name: 'Role RY',
+        component: () => import('@views/user/RoleRY.vue'),
+        meta: {
+          title: '角色管理',
+          keepAlive: true
+        }
       }
     ]
   },

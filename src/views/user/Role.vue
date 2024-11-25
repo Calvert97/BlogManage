@@ -2,7 +2,7 @@
   <div class="page-content">
     <el-row>
       <el-col :xs="24" :sm="12" :lg="6">
-        <el-input placeholder="部门名称"></el-input>
+        <el-input placeholder="角色名称"></el-input>
       </el-col>
       <div style="width: 12px"></div>
       <el-col :xs="24" :sm="12" :lg="6" class="el-col2">

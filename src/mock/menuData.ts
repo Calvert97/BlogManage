@@ -139,6 +139,12 @@ export const menuData: MenuListType[] = [
         title: '角色权限',
         title_en: 'Roles',
         path: '/user/role'
+      },      
+      {
+        id: 305,
+        title: '角色管理',
+        title_en: 'Roles RY',
+        path: '/user/roleRY'
       }
     ]
   },

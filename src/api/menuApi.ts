@@ -2,6 +2,30 @@ import { fourDotsSpinnerSvg } from '@/assets/svg/loading'
 import { menuData } from '@/mock/menuData'
 import { MenuListType } from '@/types/menu'
 import { ElLoading } from 'element-plus'
+import { request } from '@/utils/request'
+
+
+// 查询菜单列表
+
+// // 创建 menuService 对象，包含 getMenuList 和其他方法
+// export const menuService = {
+//   // 查询菜单列表
+//   getMenuList(query: MenuListType) {
+//     return request({
+//       url: 'system/menu/list',
+//       method: 'get',
+//       params: query
+//     });
+//   },
+
+//   // 其他可能的方法...
+// };
+
+// // 默认导出 menuService
+// export default menuService;
+
+
+
 
 // 菜单接口
 export const menuService = {
